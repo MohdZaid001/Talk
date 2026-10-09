@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talk/auth/auth_service.dart';
 import 'package:talk/components/my__textfield.dart';
 import 'package:talk/components/my_button.dart';
 
@@ -11,12 +12,21 @@ class LoginPage extends StatelessWidget {
   
   LoginPage({super.key, required this.onTap});
 
-  void login() {}
+  void login(BuildContext context) async{
+    AuthService authService = AuthService();
+    try{
+      authService.signInWithEamailAndPassword(_emailController.text, _passwordController.text);
+    }on Exception catch (e){
+      showDialog(context: context, builder: (context)=>AlertDialog(
+        title: Text(e.toString()),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +66,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 25),
 
             // login Btn
-            MyButton(text: "Login", onTap: login),
+            MyButton(text: "Login", onTap: ()=>login(context)),
             const SizedBox(height: 25),
 
             //register now Btn

@@ -1,8 +1,20 @@
-# Talk
+# Talk 💬
 
-A new Flutter project in which people can talk with each other.
-Can work on multiple platforms.
+A simple real-time chatting application building with Flutter and Firebase.
 
-## To be in mind
+Talk is a Flutter-based chat app focused on providing a clean and simple messaging experience. The project is being developed using Flutter, Firebase authentication.
 
-this project is in under development features are not working right know.
+## ✨ Current Working Features
+
+- 🔐 User Registration & Login
+- 🚪 User Sign Out
+- 🔥 Firebase Authentication
+- 🧩 Organized project structure
+
+## 🛠️ Tech Stack
+
+- **Flutter** — UI and application development
+- **Dart** — Programming language
+- **Firebase Authentication** — User authentication
+- **Firebase Core** — Firebase integration
+- **Material Design** — UI components
