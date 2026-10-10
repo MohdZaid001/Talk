@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:talk/themes/dark_mode.dart';
 import 'package:talk/themes/theme_provider.dart';
 
 class ChatBubble extends StatelessWidget {
