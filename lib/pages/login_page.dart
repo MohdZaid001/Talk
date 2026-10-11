@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talk/components/my_dialog.dart';
 import 'package:talk/services/auth/auth_service.dart';
 import 'package:talk/components/my__textfield.dart';
 import 'package:talk/components/my_button.dart';
@@ -12,21 +13,27 @@ class LoginPage extends StatelessWidget {
   
   LoginPage({super.key, required this.onTap});
 
-  void login(BuildContext context) async{
+  Future<void> login(BuildContext context) async{
     AuthService authService = AuthService();
     try{
-      authService.signInWithEamailAndPassword(_emailController.text, _passwordController.text);
+      await authService.signInWithEamailAndPassword(_emailController.text, _passwordController.text);
     }on Exception catch (e){
-      showDialog(context: context, builder: (context)=>AlertDialog(
-        title: Text(e.toString()),
-      ));
+      // check user is still on login page while waiting, if not then dont show dialog
+      if(!context.mounted) return;
+       showAppDialog(
+          context: context,
+          title: "Login failed",
+          message: e.toString(),
+          icon: Icons.error_outline_rounded,
+          color: Colors.red,
+        );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

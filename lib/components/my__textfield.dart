@@ -5,7 +5,7 @@ class MyTextField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController controller;
   final FocusNode? focusNode;
-
+  final IconData? prefixIcon;
 
   const MyTextField({
     super.key,
@@ -13,7 +13,9 @@ class MyTextField extends StatelessWidget {
     required this.obscureText,
     required this.controller,
     this.focusNode,
+    this.prefixIcon,
   });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,6 +39,7 @@ class MyTextField extends StatelessWidget {
           hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
           filled: true,
           hintText: hintText,
+          prefixIcon: Icon(prefixIcon,color: Theme.of(context).colorScheme.primary,),
         ),
       ),
     );
