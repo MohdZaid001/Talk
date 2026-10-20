@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
@@ -8,23 +10,28 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadius.circular(12),
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(5),
         ),
-        margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 25),
-        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(
           children: [
             // User Profile pic
-            Icon(Icons.person),
+            CircleAvatar(
+              backgroundColor: Colors.lightBlue,
+              radius: 20,
+              child: Text(text[0].toUpperCase()),
+            ),
 
-            const SizedBox(width: 20,),
-            // User name
-            Text(text)
+            const SizedBox(width: 20),
+            // User name --> (first letter is capital AND @___.com is removed)
+            Text(text.split("@")[0][0].toUpperCase()+text.split("@")[0].substring(1), style: TextStyle(fontSize: 16)),
           ],
         ),
       ),

@@ -73,12 +73,11 @@ class _ChatPageState extends State<ChatPage> {
 
     scrollDown();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.reciverEmail),
+        title: Text(widget.reciverEmail.split("@")[0][0].toUpperCase()+ widget.reciverEmail.split("@")[0].substring(1)),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey.shade600,
         elevation: 0,

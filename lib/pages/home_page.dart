@@ -17,7 +17,6 @@ class HomePage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("Home"),
-        backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey.shade600,
         elevation: 0,
       ),
