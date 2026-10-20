@@ -9,11 +9,11 @@ I'm continuously improving Talk and welcome contributions from other developers!
 
 | Home Screen | Chat Screen |
 |:---:|:---:|
-| ![Home Screen](screenshots/3.png) | ![Chat Screen](screenshots/6.png) |
+| <img src="screenshots/3.jpg" width="180" alt="Home Screen"> | <img src="screenshots/6.jpg" width="180" alt="Chat Screen"> |
 
 | Login Screen | App Menu |
 |:---:|:---:|
-| ![Login Screen](screenshots/1.png) | ![App Menu](screenshots/5.png) |
+| <img src="screenshots/1.jpg" width="180" alt="Login Screen"> | <img src="screenshots/5.jpg" width="180" alt="App Menu"> |
 
 ## ✨ Features
 
