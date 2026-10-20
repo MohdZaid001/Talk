@@ -4,11 +4,11 @@ import 'package:talk/components/chat_bubble.dart';
 import 'package:talk/components/my__textfield.dart';
 import 'package:talk/services/auth/auth_service.dart';
 import 'package:talk/services/chat/chat_service.dart';
+import 'package:talk/services/contact_storage.dart';
 
 class ChatPage extends StatefulWidget {
   final String reciverEmail;
   final String reciverId;
-
   const ChatPage({
     super.key,
     required this.reciverEmail,
@@ -73,25 +73,116 @@ class _ChatPageState extends State<ChatPage> {
 
     scrollDown();
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.reciverEmail.split("@")[0][0].toUpperCase()+ widget.reciverEmail.split("@")[0].substring(1)),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey.shade600,
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          //  previous chat
-          Expanded(child: _buildMessageList()),
+    
+return Scaffold(
+  appBar: AppBar(
+    leading: IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => Navigator.pop(context),
+    ),
+    title: Row(
+      children: [
+        CircleAvatar(
+          backgroundColor: Colors.lightBlue,
+          radius: 20,
+          child: Text(
+            widget.reciverEmail.isNotEmpty
+                ? widget.reciverEmail[0].toUpperCase()
+                : '?',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
 
-          // text field box
-          _buildUserInput(),
-        ],
+        // Username and email
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                widget.reciverEmail.split('@')[0].isNotEmpty
+                    ? widget.reciverEmail.split('@')[0][0].toUpperCase() +
+                        widget.reciverEmail.split('@')[0].substring(1)
+                    : 'User',
+                style: const TextStyle(fontSize: 16),
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                widget.reciverEmail,
+                style: const TextStyle(fontSize: 11),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+
+    // Remove button on right side
+    actions: [
+      IconButton(
+        tooltip: 'Remove contact',
+        icon: const Icon(Icons.person_remove_alt_1_outlined),
+        onPressed: () async {
+          final shouldRemove = await showDialog<bool>(
+            context: context,
+            builder: (dialogContext) => AlertDialog(
+              title: const Text('Remove contact?'),
+              content: const Text(
+                'Do you want to remove this contact from your saved contacts?',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () =>
+                      Navigator.pop(dialogContext, false),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () =>
+                      Navigator.pop(dialogContext, true),
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
+          );
+
+          if (shouldRemove != true || !context.mounted) return;
+
+          await ContactStorage().removeContact(
+            widget.reciverEmail,
+          );
+
+          if (!context.mounted) return;
+
+          Navigator.pop(context);
+
+        },
       ),
-    );
+    ],
+
+    backgroundColor: Colors.transparent,
+    foregroundColor: Colors.grey.shade600,
+    elevation: 0,
+  ),
+
+  body: Column(
+    children: [
+      // Previous chat messages
+      Expanded(child: _buildMessageList()),
+
+      // Message input
+      _buildUserInput(),
+    ],
+  ),
+);
+
   }
 
   Widget _buildMessageList() {
