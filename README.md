@@ -1,159 +1,180 @@
-# Talk 💬
+# 💬 Talk — Real-Time Chat App
 
-**A real-time messaging application built with Flutter, Dart, and Firebase.**
+**Talk** is a chat application built with Flutter and Firebase. My goal is to create a simple, clean messaging experience with real-time conversations, contact management, and dark mode.
 
-Talk is a cross-platform chat application designed to provide a simple messaging experience with Firebase Authentication, Cloud Firestore, and a customizable interface.
+I'm continuously improving Talk and welcome contributions from other developers! 🚀
 
-The project is currently under development, with a focus on reliable authentication, real-time communication, and a clean application architecture.
+## 📸 Screenshots
+
+
+| Home Screen | Chat Screen |
+|:---:|:---:|
+| ![Home Screen](screenshots/3.png) | ![Chat Screen](screenshots/6.png) |
+
+| Login Screen | App Menu |
+|:---:|:---:|
+| ![Login Screen](screenshots/1.png) | ![App Menu](screenshots/5.png) |
 
 ## ✨ Features
 
-### Implemented functionality
-
-- **User Authentication** — Email and password registration and login using Firebase Authentication.
-- **Real-Time Messaging** — Send and receive text messages through Cloud Firestore streams.
-- **Light and Dark Themes** — Switch between light and dark interface themes.
-- **One-to-One Conversations** — Messages between two users are stored in a shared conversation room.
-- **User Directory** — View registered users and open a conversation.
-
-- **Reusable UI Components** — Shared widgets for text fields, buttons, user tiles, chat bubbles, and navigation.
+- [x] 🔐 **Authentication** — Register and log in using email and password.
+- [x] 💬 **Real-Time Messaging** — Send and receive messages using Cloud Firestore.
+- [x] 👥 **Contact Management** — Add and remove contacts.
+- [x] 🌗 **Dark Mode** — Switch between light and dark themes.
+- [x] 🔎 **User Discovery** — Browse registered users and add contacts.
+- [x] 🧩 **Reusable Widgets** — Shared components for chat bubbles, buttons, dialogs, and more.
 
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
 |---|---|
-| Flutter | Cross-platform application UI |
-| Dart | Application programming language |
-| Firebase Core | Firebase initialization |
-| Firebase Authentication | User registration and login |
-| Cloud Firestore | User profiles and real-time messages |
-| Provider | Theme state management |
-| Material Design | UI components and styling |
+| 🐦 Flutter & Dart | App development |
+| 🔥 Firebase Authentication | User authentication |
+| ☁️ Cloud Firestore | User data and real-time messaging |
+| 🎨 Provider | Theme state management |
+| 💾 SharedPreferences | Local contact storage |
 
 ## 📁 Project Structure
 
 ```text
-Talk/
-├── android/                 # Android platform files
-├── ios/                     # iOS platform files
-├── linux/                   # Linux platform scaffold
-├── macos/                   # macOS platform files
-├── web/                     # Web platform files
-├── windows/                 # Windows platform files
-├── lib/
-│   ├── components/          # Reusable UI components
-│   ├── models/              # Message data model
-│   ├── pages/               # Home, login, register, and chat screens
-│   ├── services/
-│   │   ├── auth/             # Authentication logic
-│   │   └── chat/             # Chat and Firestore operations
-│   ├── themes/              # Light and dark themes
-│   ├── firebase_options.dart
-│   └── main.dart
-├── firebase.json
-├── pubspec.yaml
-├── pubspec.lock
-└── README.md
+lib/
+├── components/          # Reusable UI widgets
+├── models/              # Message data model
+├── pages/               # App screens
+├── services/
+│   ├── auth/            # Authentication logic
+│   ├── chat/            # Chat and user streams
+│   └── contact_storage.dart
+├── themes/              # Light/dark themes and provider
+├── firebase_options.dart
+└── main.dart             # App entry point
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-Before running Talk, install:
+- [ ] Install the [Flutter SDK](https://docs.flutter.dev/get-started/install).
+- [ ] Set up an editor such as [VS Code](https://code.visualstudio.com/) or Android Studio.
+- [ ] Create a [Firebase project](https://console.firebase.google.com/).
 
-- [Flutter SDK](https://docs.flutter.dev/get-started/install)
-- [Dart SDK](https://dart.dev/get-dart) (included with Flutter)
-- [Git](https://git-scm.com/downloads)
-- Android Studio, VS Code, or another supported Flutter IDE
-- A Firebase project
+### Installation
 
-### 1. Clone the repository
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/MohdZaid001/Talk.git
 cd Talk
 ```
 
-### 2. Install dependencies
+**2. Install dependencies**
 
 ```bash
 flutter pub get
 ```
 
-### 3. Configure Firebase
+**3. Configure Firebase**
 
-1. Create a project in the [Firebase Console](https://console.firebase.google.com/).
-2. Register the required application platforms in your Firebase project.
-3. Enable **Email/Password** sign-in under Authentication.
-4. Create a Cloud Firestore database.
-5. Configure FlutterFire for the platforms you intend to support.
+Connect the project to your own Firebase project using the [FlutterFire CLI](https://firebase.google.com/docs/flutter/setup). Enable Email/Password Authentication and configure Cloud Firestore with appropriate security rules.
 
-Install the FlutterFire CLI if necessary, then run:
+**4. Run the app**
 
 ```bash
-dart pub global activate flutterfire_cli
-flutterfire configure
-```
-
-Review the generated Firebase configuration before running the application. Ensure that the Firebase project, application IDs, and enabled services match your setup.
-
-### 4. Run the application
-
-Connect a device, start an emulator, or select a supported target.
-
-```bash
-flutter devices
 flutter run
 ```
+## 🗺️ Upcoming Features
 
-**Platform note:** The current Firebase options file does not configure Linux. Run the application on a configured platform, or add and verify Linux Firebase configuration before targeting Linux.
+These are ideas I'm planning to work on next:
 
-## 🗄️ Data Model
+- [ ] 🎨 Improve the overall UI and user experience.
+- [ ] 🖼️ Profile pictures and customizable profiles.
+- [ ] 📎 Image and file sharing.
+- [ ] 🔔 Push notifications for new messages.
+- [ ] ✓✓ Message timestamps and read receipts.
+- [ ] 🔍 Better contact search and chat organization.
+- [ ] 🖼️ Send pics also.
 
-The current implementation uses Cloud Firestore for user profiles and conversation messages.
-
-### Users
-
-Collection: `Users`
-
-Each user document is identified by the Firebase Authentication UID.
-
-| Field | Purpose |
-|---|---|
-| `uid` | User identifier |
-| `email` | Registered email address |
-
-### Chat Rooms
-
-Collection: `chat_rooms`
-
-Each conversation room uses a deterministic ID derived from the two participant UIDs, sorted and joined with an underscore.
-
-Subcollection: `messages`
-
-| Field | Purpose |
-|---|---|
-| `senderId` | UID of the message sender |
-| `senderEmail` | Sender's email address |
-| `reciverId` | Recipient UID |
-| `message` | Text message content |
-| `timestamp` | Firestore timestamp |
-
-The current schema uses `reciverId` as its field name. Consider migrating it to `receiverId` consistently across the model, service, database, and security rules before a larger deployment.
-
+Have another idea? Feel free to suggest it!
 
 ## 🤝 Contributing
 
-Contributions and suggestions are welcome.
+I'd love to have other developers contribute to Talk! Whether you're fixing a bug, improving the UI, or suggesting a new feature, every useful contribution is welcome.
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes.
-4. Run `flutter analyze` and `flutter test`.
-5. Submit a pull request describing the changes.
+### How to contribute
 
-## 👨‍💻 Author
+**1. Find something to work on**
+
+- [ ] Check the existing [Issues](https://github.com/MohdZaid001/Talk/issues).
+- [ ] Look for a bug or feature you'd like to work on.
+- [ ] For bigger changes, open an issue first to discuss your idea.
+
+**2. Fork and clone the repository**
+
+Click **Fork** on GitHub, then clone your fork:
+
+```bash
+git clone https://github.com/YOUR-USERNAME/Talk.git
+cd Talk
+```
+
+**3. Create a branch**
+
+```bash
+git checkout -b feature/main
+```
+
+For bug fixes, you can use `fix/your-bug-name`.
+
+**4. Make your changes**
+
+- [ ] Keep the code clean and easy to understand.
+- [ ] Follow the existing Flutter and Dart code style.
+- [ ] Test your changes before submitting.
+- [ ] Avoid committing secrets or private Firebase credentials.
+
+**5. Commit and push**
+
+```bash
+git add .
+git commit -m "Add: describe your changes"
+git push origin feature/your-feature-name
+```
+
+**6. Open a Pull Request**
+
+Go to your fork on GitHub and click **Compare & pull request**. Explain what you changed, why you changed it, and any testing you performed.
+
+I'll review contributions and discuss any changes that may be needed.
+
+### Contribution ideas 💡
+
+Not sure where to start? You could help with:
+
+- Improving the chat interface.
+- Fixing bugs and handling edge cases.
+- Adding profile customisation.
+- Improving accessibility.
+- Writing documentation or testing existing features.
+
+## 🐛 Found a Bug?
+
+Please [open an issue](https://github.com/MohdZaid001/Talk/issues/new) with a clear description of the problem and steps to reproduce it. Screenshots are helpful when the issue involves the UI.
+
+## 📌 Project Status
+
+**Status: Active Development 🟢**
+
+Talk is a working project that I'm continuing to improve. Some features listed above are planned and may change as development progresses.
+
+⭐ If you find Talk interesting, consider giving the repository a star.
+
+**Repository:** [MohdZaid001/Talk](https://github.com/MohdZaid001/Talk)
+
+## 👨‍💻 About Me
+
+Hi! I'm a developer learning and building with Flutter, Dart, and Firebase. I created Talk as a hands-on project to improve my mobile development skills and explore real-time applications.
+
+I'm still experimenting, and adding new features. If you're interested in the project, feel free to explore the code, share feedback, or contribute!
 
 **Mohd Zaid**
 

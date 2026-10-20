@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> {
       drawer: const MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: _openAddUserPage,
+        backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
       ),
       body: _buildUserList(),
