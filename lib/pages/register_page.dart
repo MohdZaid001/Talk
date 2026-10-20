@@ -61,11 +61,11 @@ class RegisterPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //logo
-            Icon(
-              Icons.message,
-              size: 60,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+             Image(image: AssetImage("assets/icons/app_icon.png"),
+            width: 200,
+            height: 200,),
+
+            const SizedBox(height: 20),
 
             // welcome message
             Text(

@@ -10,41 +10,43 @@ class LoginPage extends StatelessWidget {
 
   //tap to go to register page
   final void Function()? onTap;
-  
+
   LoginPage({super.key, required this.onTap});
 
-  Future<void> login(BuildContext context) async{
+  Future<void> login(BuildContext context) async {
     AuthService authService = AuthService();
-    try{
-      await authService.signInWithEamailAndPassword(_emailController.text, _passwordController.text);
-    }on Exception catch (e){
+    try {
+      await authService.signInWithEamailAndPassword(
+        _emailController.text,
+        _passwordController.text,
+      );
+    } on Exception catch (e) {
       // check user is still on login page while waiting, if not then dont show dialog
-      if(!context.mounted) return;
-       showAppDialog(
-          context: context,
-          title: "Login failed",
-          message: e.toString(),
-          icon: Icons.error_outline_rounded,
-          color: Colors.red,
-        );
+      if (!context.mounted) return;
+      showAppDialog(
+        context: context,
+        title: "Login failed",
+        message: e.toString(),
+        icon: Icons.error_outline_rounded,
+        color: Colors.red,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //logo
-            Icon(
-              Icons.message,
-              size: 60,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            Image(image: AssetImage("assets/icons/app_icon.png"),
+            width: 200,
+            height: 200,),
 
+            const SizedBox(height: 20),
             // welcome back message
             Text(
               "Welcome back, She masseged you!!!",
@@ -61,6 +63,7 @@ class LoginPage extends StatelessWidget {
               hintText: "Email",
               obscureText: false,
               controller: _emailController,
+              prefixIcon: Icons.email_outlined,
             ),
             const SizedBox(height: 10),
 
@@ -69,11 +72,12 @@ class LoginPage extends StatelessWidget {
               hintText: "Password",
               obscureText: true,
               controller: _passwordController,
+              prefixIcon: Icons.lock_outlined,
             ),
             const SizedBox(height: 25),
 
             // login Btn
-            MyButton(text: "Login", onTap: ()=>login(context)),
+            MyButton(text: "Login", onTap: () => login(context)),
             const SizedBox(height: 25),
 
             //register now Btn

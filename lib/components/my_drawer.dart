@@ -23,10 +23,10 @@ class MyDrawer extends StatelessWidget {
               // logo
               DrawerHeader(
                 child: Center(
-                  child: Icon(
-                    Icons.message,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 40,
+                  child: Image(
+                    image: AssetImage("assets/icons/app_icon.png"),     
+                    width: 100,
+                    height: 100,
                   ),
                 ),
               ),
